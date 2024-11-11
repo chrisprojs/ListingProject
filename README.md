@@ -2,8 +2,8 @@
 An exercise to assess your skills with java, backend development and microservices architecture.
 
 # Biodata
-Name: Christian Antonius Anggaresta
-LinkedIn: https://www.linkedin.com/in/christian-antonius-anggaresta-84b715243
+Name: Christian Antonius Anggaresta<br/>
+LinkedIn: https://www.linkedin.com/in/christian-antonius-anggaresta-84b715243<br/>
 Portfolio: https://christian-antonius-portfolio.netlify.app
 
 ## Architecture
@@ -60,6 +60,8 @@ Response:
     ]
 }
 ```
+###### Proof
+![Get all listings](https://github.com/chrisprojs/ListingProject/blob/main/image-documentation/GetAllListings.png)
 
 ##### Create listing
 ```
@@ -85,6 +87,8 @@ Response:
     }
 }
 ```
+###### Proof
+![Create listing](https://github.com/chrisprojs/ListingProject/blob/main/image-documentation/CreateListing.png)
 
 ### 2) User Service
 The user service stores information about all the users on the system. Fields available in the user object:
@@ -119,6 +123,8 @@ Response:
     ]
 }
 ```
+###### Proof
+![Get all users](https://github.com/chrisprojs/ListingProject/blob/main/image-documentation/GetAllUsers.png)
 
 ##### Get specific user
 Retrieve a user by ID
@@ -137,6 +143,8 @@ Response:
     }
 }
 ```
+###### Proof
+![Get specific user](https://github.com/chrisprojs/ListingProject/blob/main/image-documentation/GetSpecificUser.png)
 
 ##### Create user
 ```
@@ -158,6 +166,8 @@ Response:
     }
 }
 ```
+###### Proof
+![Create user](https://github.com/chrisprojs/ListingProject/blob/main/image-documentation/CreateUser.png)
 
 ### 3) Public APIs
 These are the public facing APIs that can be called by external clients such as mobile applications or the user facing website.
@@ -194,6 +204,8 @@ userId = str # Optional
 }
 
 ```
+###### Proof
+![Get listings Public API](https://github.com/chrisprojs/ListingProject/blob/main/image-documentation/GetAllListingsPublicAPI.png)
 
 ##### Create user
 ```
@@ -217,6 +229,8 @@ Response:
     }
 }
 ```
+###### Proof
+![Create user Public API](https://github.com/chrisprojs/ListingProject/blob/main/image-documentation/CreateUserPublicAPI.png)
 
 ##### Create listing
 ```
@@ -244,6 +258,8 @@ Response:
     }
 }
 ```
+###### Proof
+![Create listing Public API](https://github.com/chrisprojs/ListingProject/blob/main/image-documentation/CreateListingPublicAPI.png)
 
 ## Requirements
 The listing service has been built already. You need to build the remaining two components: the user service and the public API layer. The implementation of the listing service can serve as a good starting point to learn more about how to structure a web application using the java spring boot.
