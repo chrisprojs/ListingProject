@@ -16,41 +16,38 @@ import com.exercise.listingproject.dto.GetSpecificUserRequestDto;
 import com.exercise.listingproject.dto.GetSpecificUserResponseDto;
 import com.exercise.listingproject.dto.GetUsersRequestDto;
 import com.exercise.listingproject.dto.GetUsersResponseDto;
-import com.exercise.listingproject.service.Services;
-
+import com.exercise.listingproject.service.UserServices;
 
 @Validated
 @RestController
 public class UserController {
+	@Autowired
+	private UserServices services;
 
-    @Autowired
-    private Services services;
+	// Get All Users
+	@GetMapping("/users")
+	public GetUsersResponseDto getAllUsers(
+			@RequestParam(name = "pageNum", defaultValue = "1") @Min(1) Integer pageNum,
+			@RequestParam(name = "pageSize", defaultValue = "10") @Min(1) Integer pageSize) {
+		GetUsersRequestDto requestDto = new GetUsersRequestDto();
+		requestDto.setPageNum(pageNum - 1);
+		requestDto.setPageSize(pageSize);
 
-    // Get All Users
-    @GetMapping("/users")
-    public GetUsersResponseDto getAllUsers(
-            @RequestParam(name = "pageNum", defaultValue = "1") @Min(1) Integer pageNum,
-            @RequestParam(name = "pageSize", defaultValue = "10") @Min(1) Integer pageSize
-    ) {
-        GetUsersRequestDto requestDto = new GetUsersRequestDto();
-        requestDto.setPageNum(pageNum - 1);
-        requestDto.setPageSize(pageSize);
+		return services.getAllUsers(requestDto);
+	}
 
-        return services.getAllUsers(requestDto);
-    }
+	// Get User By Id
+	@GetMapping("/users/{id}")
+	public GetSpecificUserResponseDto getSpecificUser(@PathVariable Integer id) {
+		GetSpecificUserRequestDto requestDto = new GetSpecificUserRequestDto();
+		requestDto.setId(id);
 
-    // Get User By Id
-    @GetMapping("/users/{id}")
-    public GetSpecificUserResponseDto getSpecificUser(@PathVariable Integer id) {
-        GetSpecificUserRequestDto requestDto = new GetSpecificUserRequestDto();
-        requestDto.setId(id);
+		return services.getSpecificUser(requestDto);
+	}
 
-        return services.getSpecificUser(requestDto);
-    }
-
-    // Create User
-    @PostMapping("/users")
-    public CreateUserResponseDto createUser(@Valid CreateUserRequestDto requestDto) {
-        return services.createUser(requestDto);
-    }
+	// Create User
+	@PostMapping("/users")
+	public CreateUserResponseDto createUser(@Valid CreateUserRequestDto requestDto) {
+		return services.createUser(requestDto);
+	}
 }

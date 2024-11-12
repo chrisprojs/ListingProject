@@ -11,53 +11,53 @@ import jakarta.persistence.OneToMany;
 @Entity(name = "users")
 public class User {
   @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    private String name;
-    private Long createdAt;
-    private Long updatedAt;
+  private String name;
+  private Long createdAt;
+  private Long updatedAt;
 
-    @OneToMany(mappedBy = "user")
-    private List<Listing> listings;
+  @OneToMany(mappedBy = "user")
+  private List<Listing> listings;
 
-    public Integer getId() {
-      return id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public void setId(Integer id) {
-      this.id = id;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public String getName() {
-      return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-      this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public Long getCreatedAt() {
-      return createdAt;
-    }
+  public Long getCreatedAt() {
+    return createdAt;
+  }
 
-    public void setCreatedAt(Long createdAt) {
-      this.createdAt = createdAt;
-    }
+  public void setCreatedAt(Long createdAt) {
+    this.createdAt = createdAt;
+  }
 
-    public Long getUpdatedAt() {
-      return updatedAt;
-    }
+  public Long getUpdatedAt() {
+    return updatedAt;
+  }
 
-    public void setUpdatedAt(Long updatedAt) {
-      this.updatedAt = updatedAt;
-    }
+  public void setUpdatedAt(Long updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 
-    public List<Listing> getListings() {
-      return listings;
-    }
+  public List<Listing> getListings() {
+    return listings;
+  }
 
-    public void setListings(List<Listing> listings) {
-      this.listings = listings;
-    }
+  public void setListings(List<Listing> listings) {
+    this.listings = listings;
+  }
 }

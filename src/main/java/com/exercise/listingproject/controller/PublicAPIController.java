@@ -34,91 +34,94 @@ import jakarta.validation.constraints.Min;
 @RestController
 @RequestMapping("/public-api")
 public class PublicAPIController {
-    // Injecting RestTemplate to make HTTP requests to other services
-    @Autowired
-    private RestTemplate restTemplate;
+	// Injecting RestTemplate to make HTTP requests to other services
+	@Autowired
+	private RestTemplate restTemplate;
 
-    @Value("${listingproject.host}")
-    private String listingProjectHost;
+	@Value("${listingproject.host}")
+	private String listingProjectHost;
 
-    // private static final Logger logger = LoggerFactory.getLogger(PublicAPIController.class);
+	// private static final Logger logger =
+	// LoggerFactory.getLogger(PublicAPIController.class);
 
-    // private static final ObjectMapper objectMapper = new ObjectMapper();
+	// private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    // Get Listings (Public API)
-    @GetMapping("/listings")
-    public GetAllListingsPublicAPIResponseDto getListingsPublicAPI(
-            @RequestParam(name = "pageNum", defaultValue = "1") @Min(1) Integer pageNum,
-            @RequestParam(name = "pageSize", defaultValue = "10") @Min(1) Integer pageSize,
-            @RequestParam(name = "userId", required = false) @Min(1) Integer userId
-    ) {
-        // Construct URL for fetching listings from the listing service
-        String listingsUrl = listingProjectHost + "/listings?pageNum=" + pageNum + "&pageSize=" + pageSize;
-        if (userId != null) {
-            listingsUrl += "&userId=" + userId;
-        }
+	// Get Listings (Public API)
+	@GetMapping("/listings")
+	public GetAllListingsPublicAPIResponseDto getListingsPublicAPI(
+			@RequestParam(name = "pageNum", defaultValue = "1") @Min(1) Integer pageNum,
+			@RequestParam(name = "pageSize", defaultValue = "10") @Min(1) Integer pageSize,
+			@RequestParam(name = "userId", required = false) @Min(1) Integer userId) {
+		// Construct URL for fetching listings from the listing service
+		String listingsUrl = listingProjectHost + "/listings?pageNum=" + pageNum + "&pageSize=" + pageSize;
+		if (userId != null) {
+			listingsUrl += "&userId=" + userId;
+		}
 
-        // Fetch listings from the listing service
-        GetAllListingsResponseDto listingsResponse = restTemplate.getForObject(listingsUrl, GetAllListingsResponseDto.class);
+		// Fetch listings from the listing service
+		GetAllListingsResponseDto listingsResponse = restTemplate.getForObject(listingsUrl,
+				GetAllListingsResponseDto.class);
 
-        // Map the fetched listings to a response format including user data
-        List<ListingPublicAPIDto> listingPublicAPIDto = listingsResponse.getListings().stream().map(listing -> {
-          ListingPublicAPIDto listingWithUser = new ListingPublicAPIDto(listing);
-            if (listing.getUserId() != null) {
-                // Call /users/{id} API for each listing's userId
-                String userUrl = listingProjectHost + "/users/" + listing.getUserId();
-                GetSpecificUserResponseDto userResponse = restTemplate.getForObject(userUrl, GetSpecificUserResponseDto.class);
-                listingWithUser.setUser(userResponse.getUser());
-            }
+		// Map the fetched listings to a response format including user data
+		List<ListingPublicAPIDto> listingPublicAPIDto = listingsResponse.getListings().stream().map(listing -> {
+			ListingPublicAPIDto listingWithUser = new ListingPublicAPIDto(listing);
+			if (listing.getUserId() != null) {
+				// Call /users/{id} API for each listing's userId
+				String userUrl = listingProjectHost + "/users/" + listing.getUserId();
+				GetSpecificUserResponseDto userResponse = restTemplate.getForObject(userUrl,
+						GetSpecificUserResponseDto.class);
+				listingWithUser.setUser(userResponse.getUser());
+			}
 
-            return listingWithUser;
-        }).collect(Collectors.toList());
+			return listingWithUser;
+		}).collect(Collectors.toList());
 
-        GetAllListingsPublicAPIResponseDto responseDto = new GetAllListingsPublicAPIResponseDto();
-        responseDto.setResult(true);
-        responseDto.setListings(listingPublicAPIDto);
-        return responseDto;
-    }
+		GetAllListingsPublicAPIResponseDto responseDto = new GetAllListingsPublicAPIResponseDto();
+		responseDto.setResult(true);
+		responseDto.setListings(listingPublicAPIDto);
+		return responseDto;
+	}
 
-    // Create Users (Public API)
-    @PostMapping("/users")
-    public CreateUserResponseDto createUserPublicAPI(@Valid @RequestBody CreateUserRequestDto requestDto) {
-      String usersUrl = listingProjectHost + "/users"; 
+	// Create Users (Public API)
+	@PostMapping("/users")
+	public CreateUserResponseDto createUserPublicAPI(@Valid @RequestBody CreateUserRequestDto requestDto) {
+		String usersUrl = listingProjectHost + "/users";
 
-      // Convert the requestDto to an x-www-form-urlencoded format
-      String formData = "name=" + requestDto.getName();
-      
-      // Set headers for x-www-form-urlencoded
-      HttpHeaders headers = new HttpHeaders();
-      headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-      
-      HttpEntity<String> entity = new HttpEntity<>(formData, headers);
-      
-      // Send POST request with x-www-form-urlencoded data
-      CreateUserResponseDto responseDto = restTemplate.exchange(
-              usersUrl, HttpMethod.POST, entity, CreateUserResponseDto.class).getBody();
+		// Convert the requestDto to an x-www-form-urlencoded format
+		String formData = "name=" + requestDto.getName();
 
-      return responseDto;
-    }
+		// Set headers for x-www-form-urlencoded
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-    // Create Listings (Public API)
-    @PostMapping("/listings")
-    public CreateListingResponseDto createListingPublicAPI(@Valid @RequestBody CreateListingRequestDto requestDto) {
-      String usersUrl = listingProjectHost + "/listings"; 
+		HttpEntity<String> entity = new HttpEntity<>(formData, headers);
 
-      // Convert the requestDto to an x-www-form-urlencoded format
-      String formData = "userId=" + requestDto.getUserId() + "&listingType=" +requestDto.getListingType() + "&price="+requestDto.getPrice();
+		// Send POST request with x-www-form-urlencoded data
+		CreateUserResponseDto responseDto = restTemplate.exchange(
+				usersUrl, HttpMethod.POST, entity, CreateUserResponseDto.class).getBody();
 
-      // Set headers for x-www-form-urlencoded
-      HttpHeaders headers = new HttpHeaders();
-      headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-      
-      HttpEntity<String> entity = new HttpEntity<>(formData, headers);
-      
-      // Send POST request with x-www-form-urlencoded data
-      CreateListingResponseDto responseDto = restTemplate.exchange(
-              usersUrl, HttpMethod.POST, entity, CreateListingResponseDto.class).getBody();
+		return responseDto;
+	}
 
-      return responseDto;
-    }
+	// Create Listings (Public API)
+	@PostMapping("/listings")
+	public CreateListingResponseDto createListingPublicAPI(@Valid @RequestBody CreateListingRequestDto requestDto) {
+		String usersUrl = listingProjectHost + "/listings";
+
+		// Convert the requestDto to an x-www-form-urlencoded format
+		String formData = "userId=" + requestDto.getUserId() + "&listingType=" + requestDto.getListingType() + "&price="
+				+ requestDto.getPrice();
+
+		// Set headers for x-www-form-urlencoded
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+		HttpEntity<String> entity = new HttpEntity<>(formData, headers);
+
+		// Send POST request with x-www-form-urlencoded data
+		CreateListingResponseDto responseDto = restTemplate.exchange(
+				usersUrl, HttpMethod.POST, entity, CreateListingResponseDto.class).getBody();
+
+		return responseDto;
+	}
 }

@@ -2,58 +2,58 @@ package com.exercise.listingproject.dto;
 
 public class ListingDto {
 
-    private Integer id;
-    private Integer userId;
-    private String listingType;
-    private Integer price;
-    private Long createdAt;
-    private Long updatedAt;
+  private Integer id;
+  private Integer userId;
+  private String listingType;
+  private Integer price;
+  private Long createdAt;
+  private Long updatedAt;
 
-    public Integer getId() {
-        return id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public Integer getUserId() {
-        return userId;
-    }
+  public Integer getUserId() {
+    return userId;
+  }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+  public void setUserId(Integer userId) {
+    this.userId = userId;
+  }
 
-    public String getListingType() {
-        return listingType;
-    }
+  public String getListingType() {
+    return listingType;
+  }
 
-    public void setListingType(String listingType) {
-        this.listingType = listingType;
-    }
+  public void setListingType(String listingType) {
+    this.listingType = listingType;
+  }
 
-    public Integer getPrice() {
-        return price;
-    }
+  public Integer getPrice() {
+    return price;
+  }
 
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
+  public void setPrice(Integer price) {
+    this.price = price;
+  }
 
-    public Long getCreatedAt() {
-        return createdAt;
-    }
+  public Long getCreatedAt() {
+    return createdAt;
+  }
 
-    public void setCreatedAt(Long createdAt) {
-        this.createdAt = createdAt;
-    }
+  public void setCreatedAt(Long createdAt) {
+    this.createdAt = createdAt;
+  }
 
-    public Long getUpdatedAt() {
-        return updatedAt;
-    }
+  public Long getUpdatedAt() {
+    return updatedAt;
+  }
 
-    public void setUpdatedAt(Long updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+  public void setUpdatedAt(Long updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 }

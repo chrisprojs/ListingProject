@@ -9,6 +9,5 @@ import java.util.List;
 
 @Repository
 public interface ListingRepository extends JpaRepository<Listing, Integer> {
-
-    List<Listing> findByUserId(Integer userId, Pageable pageable);
+	List<Listing> findByUserId(Integer userId, Pageable pageable);
 }
