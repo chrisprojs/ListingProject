@@ -1,6 +1,3 @@
-# Backend Tech Challenge
-An exercise to assess your skills with java, backend development and microservices architecture.
-
 # Biodata
 Name: Christian Antonius Anggaresta<br/>
 LinkedIn: https://www.linkedin.com/in/christian-antonius-anggaresta-84b715243<br/>
