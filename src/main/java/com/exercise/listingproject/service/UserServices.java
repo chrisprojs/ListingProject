@@ -8,9 +8,9 @@ import com.exercise.listingproject.dto.GetUsersRequestDto;
 import com.exercise.listingproject.dto.GetUsersResponseDto;
 
 public interface UserServices {
-    GetUsersResponseDto getAllUsers(GetUsersRequestDto requestDto);
+  GetUsersResponseDto getAllUsers(GetUsersRequestDto requestDto);
 
-    CreateUserResponseDto createUser(CreateUserRequestDto requestDto);
+  CreateUserResponseDto createUser(CreateUserRequestDto requestDto);
 
-    GetSpecificUserResponseDto getSpecificUser(GetSpecificUserRequestDto requestDto);
+  GetSpecificUserResponseDto getSpecificUser(GetSpecificUserRequestDto requestDto);
 }

@@ -6,8 +6,7 @@ import com.exercise.listingproject.dto.GetAllListingsRequestDto;
 import com.exercise.listingproject.dto.GetAllListingsResponseDto;
 
 public interface ListingServices {
+  GetAllListingsResponseDto getAllListings(GetAllListingsRequestDto requestDto);
 
-    GetAllListingsResponseDto getAllListings(GetAllListingsRequestDto requestDto);
-
-    CreateListingResponseDto createListing(CreateListingRequestDto requestDto);
+  CreateListingResponseDto createListing(CreateListingRequestDto requestDto);
 }
