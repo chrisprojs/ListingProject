@@ -2,8 +2,8 @@ package com.exercise.listingproject.controller;
 
 import com.exercise.listingproject.dto.CreateListingRequestDto;
 import com.exercise.listingproject.dto.CreateListingResponseDto;
-import com.exercise.listingproject.dto.GetListingsRequestDto;
-import com.exercise.listingproject.dto.GetListingsResponseDto;
+import com.exercise.listingproject.dto.GetAllListingsRequestDto;
+import com.exercise.listingproject.dto.GetAllListingsResponseDto;
 import com.exercise.listingproject.service.Services;
 
 import jakarta.validation.Valid;
@@ -25,12 +25,12 @@ public class ListingController {
 
     // Get All Listings
     @GetMapping("/listings")
-    public GetListingsResponseDto getAllListings(
+    public GetAllListingsResponseDto getAllListings(
             @RequestParam(name = "pageNum", defaultValue = "1") @Min(1) Integer pageNum,
             @RequestParam(name = "pageSize", defaultValue = "10") @Min(1) Integer pageSize,
             @RequestParam(name = "userId", required = false) @Min(1) Integer userId
     ) {
-        GetListingsRequestDto requestDto = new GetListingsRequestDto();
+        GetAllListingsRequestDto requestDto = new GetAllListingsRequestDto();
         requestDto.setPageNum(pageNum - 1);
         requestDto.setPageSize(pageSize);
         requestDto.setUserId(userId);

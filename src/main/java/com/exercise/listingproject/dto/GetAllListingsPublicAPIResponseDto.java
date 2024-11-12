@@ -2,7 +2,7 @@ package com.exercise.listingproject.dto;
 
 import java.util.List;
 
-public class GetListingsPublicAPIResponseDto {
+public class GetAllListingsPublicAPIResponseDto {
     private boolean result;
     private List<ListingPublicAPIDto> listings;
 

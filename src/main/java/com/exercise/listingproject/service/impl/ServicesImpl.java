@@ -5,8 +5,8 @@ import com.exercise.listingproject.dto.CreateListingResponseDto;
 import com.exercise.listingproject.dto.CreateUserRequestDto;
 import com.exercise.listingproject.dto.CreateUserResponseDto;
 
-import com.exercise.listingproject.dto.GetListingsRequestDto;
-import com.exercise.listingproject.dto.GetListingsResponseDto;
+import com.exercise.listingproject.dto.GetAllListingsRequestDto;
+import com.exercise.listingproject.dto.GetAllListingsResponseDto;
 import com.exercise.listingproject.dto.GetSpecificUserRequestDto;
 import com.exercise.listingproject.dto.GetSpecificUserResponseDto;
 import com.exercise.listingproject.dto.GetUsersRequestDto;
@@ -44,7 +44,7 @@ public class ServicesImpl implements Services {
     // private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public GetListingsResponseDto getAllListings(GetListingsRequestDto requestDto) {
+    public GetAllListingsResponseDto getAllListings(GetAllListingsRequestDto requestDto) {
         // Paging Listings and sort descending by createdAt
         PageRequest pageRequest = PageRequest.of(requestDto.getPageNum(),
                 requestDto.getPageSize(), Sort.by("createdAt").descending()
@@ -64,7 +64,7 @@ public class ServicesImpl implements Services {
                 .map(this::convertListingToListingDto)
                 .collect(Collectors.toList());
 
-        GetListingsResponseDto responseDto = new GetListingsResponseDto();
+        GetAllListingsResponseDto responseDto = new GetAllListingsResponseDto();
         responseDto.setResult(true);
         responseDto.setListings(listingDtoList);
 

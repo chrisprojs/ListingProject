@@ -3,7 +3,7 @@ package com.exercise.listingproject.dto;
 
 import java.util.List;
 
-public class GetListingsResponseDto {
+public class GetAllListingsResponseDto {
 
     private boolean result;
     private List<ListingDto> listings;

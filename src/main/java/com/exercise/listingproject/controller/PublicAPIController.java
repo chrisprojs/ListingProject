@@ -22,8 +22,8 @@ import com.exercise.listingproject.dto.CreateListingRequestDto;
 import com.exercise.listingproject.dto.CreateListingResponseDto;
 import com.exercise.listingproject.dto.CreateUserRequestDto;
 import com.exercise.listingproject.dto.CreateUserResponseDto;
-import com.exercise.listingproject.dto.GetListingsPublicAPIResponseDto;
-import com.exercise.listingproject.dto.GetListingsResponseDto;
+import com.exercise.listingproject.dto.GetAllListingsPublicAPIResponseDto;
+import com.exercise.listingproject.dto.GetAllListingsResponseDto;
 import com.exercise.listingproject.dto.GetSpecificUserResponseDto;
 import com.exercise.listingproject.dto.ListingPublicAPIDto;
 
@@ -47,7 +47,7 @@ public class PublicAPIController {
 
     // Get Listings (Public API)
     @GetMapping("/listings")
-    public GetListingsPublicAPIResponseDto getListingsPublicAPI(
+    public GetAllListingsPublicAPIResponseDto getListingsPublicAPI(
             @RequestParam(name = "pageNum", defaultValue = "1") @Min(1) Integer pageNum,
             @RequestParam(name = "pageSize", defaultValue = "10") @Min(1) Integer pageSize,
             @RequestParam(name = "userId", required = false) @Min(1) Integer userId
@@ -59,7 +59,7 @@ public class PublicAPIController {
         }
 
         // Fetch listings from the listing service
-        GetListingsResponseDto listingsResponse = restTemplate.getForObject(listingsUrl, GetListingsResponseDto.class);
+        GetAllListingsResponseDto listingsResponse = restTemplate.getForObject(listingsUrl, GetAllListingsResponseDto.class);
 
         // Map the fetched listings to a response format including user data
         List<ListingPublicAPIDto> listingPublicAPIDto = listingsResponse.getListings().stream().map(listing -> {
@@ -74,7 +74,7 @@ public class PublicAPIController {
             return listingWithUser;
         }).collect(Collectors.toList());
 
-        GetListingsPublicAPIResponseDto responseDto = new GetListingsPublicAPIResponseDto();
+        GetAllListingsPublicAPIResponseDto responseDto = new GetAllListingsPublicAPIResponseDto();
         responseDto.setResult(true);
         responseDto.setListings(listingPublicAPIDto);
         return responseDto;

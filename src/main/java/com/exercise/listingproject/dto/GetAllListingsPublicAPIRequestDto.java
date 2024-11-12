@@ -1,8 +1,6 @@
 package com.exercise.listingproject.dto;
 
-
-public class GetListingsRequestDto {
-
+public class GetAllListingsPublicAPIRequestDto {
     private Integer userId;
     private Integer pageNum;
     private Integer pageSize;
