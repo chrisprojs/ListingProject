@@ -16,8 +16,8 @@ Services are free to store the data in any format they wish (in a SQL table, or 
 
 How does the mobile app or user-facing website access the data in the system? This is where the public API layer comes in. The public API layer is a web application that contains APIs that can be called by external clients/applications. This web application is responsible for interacting with the listing/user service through its APIs to pull out the relevant data and return it to the external caller in the appropriate format.
 
-## Object Relational Mapping
-Here's the representation of Object Relational Mapping for H2 Databases that persisted in https://github.com/chrisprojs/ListingProject/blob/main/data/testdb.mv.db
+## Database Diagram
+Here's the representation of Database Diagram for H2 Databases that persisted in https://github.com/chrisprojs/ListingProject/blob/main/data/testdb.mv.db
 ![Object Relational Mapping](https://github.com/chrisprojs/ListingProject/blob/main/image-documentation/ObjectRelationalMapping.png)
 
 ### 1) Listing Service
